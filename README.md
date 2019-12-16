@@ -1,1 +1,1 @@
-## Proyecto de ejemplo para la visualización de datos usando Vega y Vega-Lita
+## Proyecto de ejemplo para la visualización de datos usando Vega y Vega-Lite

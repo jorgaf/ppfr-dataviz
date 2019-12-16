@@ -32,14 +32,15 @@
         "height": 200,
         mark: 'bar',
         encoding: {
+            x: {
+                field: 'day',
+                type: 'quantitative',
+                title: 'Día del mes'
+            },
             y: {
                 field: 'count',
                 type: 'quantitative',
-
-            },
-            x: {
-                field: 'day',
-                type: 'quantitative'
+                title: '# publicaciones'
             }
         }
     };
