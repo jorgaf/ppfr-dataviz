@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.2.1"></script>
 
-    <title>DataViz - Proyecto Programación Funcional y Reactiva</title>
+    <title>DataViz - Proyecto Programaci&oacute;n Funcional y Reactiva</title>
 
     <style media="screen">
         /* Add space between Vega-Embed links  */
@@ -17,25 +17,27 @@
     </style>
 </head>
 <body>
-<h1>Número de publicaciones por día</h1>
+<h1>N&uacute;mero de publicaciones por d&iacute;a y hora</h1>
 <!-- Container for the visualization -->
-<div id="vis"></div>
+<div id="vis1"></div>
+<div id="vis2"></div>
 
 <script>
     // Assign the specification to a local variable vlSpec.
-    var vlSpec = {
+    const vlSpec1 = {
         $schema: 'https://vega.github.io/schema/vega-lite/v4.json',
         data: {
             "url": "data/activeDays.csv"
         },
-        "width": 200,
+        "width": 320,
         "height": 200,
         mark: 'bar',
         encoding: {
             x: {
                 field: 'day',
                 type: 'quantitative',
-                title: 'Día del mes'
+                title: 'Día del mes',
+                "scale": {"domain": [1, 32]}
             },
             y: {
                 field: 'count',
@@ -44,9 +46,33 @@
             }
         }
     };
-
     // Embed the visualization in the container with id `vis`
-    vegaEmbed('#vis', vlSpec);
+    vegaEmbed('#vis1', vlSpec1);
+
+    const vlSpec2 = {
+        $schema: 'https://vega.github.io/schema/vega-lite/v4.json',
+        data: {
+            "url": "data/activeHours.csv"
+        },
+        "width": 320,
+        "height": 200,
+        mark: 'area',
+        encoding: {
+            x: {
+                field: 'hour',
+                type: 'quantitative',
+                title: 'Hora del día',
+                scale: {"domain": [0, 23]}
+            },
+            y: {
+                field: 'count',
+                aggregate: 'sum',
+                type: 'quantitative',
+                title: '# publicaciones'
+            }
+        }
+    };
+    vegaEmbed('#vis2', vlSpec2);
 </script>
 </body>
 </html>
