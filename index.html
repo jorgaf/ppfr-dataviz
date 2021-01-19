@@ -17,12 +17,13 @@
     </style>
 </head>
 <body>
-<h1>N&uacute;mero de publicaciones por d&iacute;a y hora</h1>
-<!-- Container for the visualization -->
-<div id="vis1"></div>
-<div id="vis2"></div>
+    <h1>N&uacute;mero de publicaciones por d&iacute;a y hora</h1>
+    <!-- Container for the visualization -->
+    <div id="vis1"></div>
+    <div id="vis2"></div>
+    <div id="vis3"></div>
 
-<script>
+    <script>
     // Assign the specification to a local variable vlSpec.
     const vlSpec1 = {
         $schema: 'https://vega.github.io/schema/vega-lite/v4.json',
@@ -31,18 +32,18 @@
         },
         "width": 320,
         "height": 200,
-        mark: 'bar',
-        encoding: {
-            x: {
-                field: 'day',
-                type: 'quantitative',
-                title: 'Día del mes',
+        "mark": "bar",
+        "encoding": {
+            "x": {
+                "field": "day",
+                "type": "quantitative",
+                "title": "Día del mes",
                 "scale": {"domain": [1, 32]}
             },
-            y: {
-                field: 'count',
-                type: 'quantitative',
-                title: '# publicaciones'
+            "y": {
+                "field": "count",
+                "type": "quantitative",
+                "title": "# publicaciones"
             }
         }
     };
@@ -73,6 +74,33 @@
         }
     };
     vegaEmbed('#vis2', vlSpec2);
+
+    const barStackedglp = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+        "data": {"url": "https://raw.githubusercontent.com/jorgaf/ppfr-dataviz/master/data/dataglp.csv"},
+        "transform": [{"filter": "datum.cantidad > 3"}],
+        "width": 320,
+        "height": 200,
+        "mark": "bar",
+        "encoding": {
+            "x": {
+                "aggregate": "sum", "field": "cantidad",
+                "type":"quantitative",
+                "title": "Cantidad"
+            },
+            "y": {
+                "field": "marca",
+                "type": "nominal",
+                "title": "Marcas"
+            },
+            "color": {
+                "field": "clase",
+                "type": "nominal",
+                "title": "Clases"
+            }
+        }
+    };
+    vegaEmbed('#vis3', barStackedglp);
 </script>
 </body>
 </html>
